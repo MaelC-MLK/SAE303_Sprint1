@@ -10,11 +10,20 @@
     <div>
       <header>
         <nav>
-         
+        <button id="prev"> ← </button>
+        <button id="now"> O </button>
+        <button id="next"> → </button>
+
+        <select id="select-year">
+          <option> Votre année </option>
+          <option value="year1">MMI1</option>
+          <option value="year2">MMI2</option>
+          <option value="year3">MMI3</option>
+        </select>
         </nav>
       </header>
 
-      <main id="calendar" style="height: 800px"></main>
+      <main id="calendar" style="height: 100vh"></main>
     </div>
 
     <script type="module" src="/main.js"></script>
