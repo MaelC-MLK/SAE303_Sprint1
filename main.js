@@ -43,18 +43,88 @@ await M.init();
 
 
 C.init = function (){
-   V.uicalendar.createEvents(M.getEvents("mmi1"));
-   V.uicalendar.createEvents(M.getEvents("mmi2"));
-   V.uicalendar.createEvents(M.getEvents("mmi3"));
+
+   // Itération 3
+
+   // V.uicalendar.createEvents(M.getEvents("mmi1"));
+   // V.uicalendar.createEvents(M.getEvents("mmi2"));
+   // V.uicalendar.createEvents(M.getEvents("mmi3"));
    V.coloradd();
 }
 
 
  C.init()
 
+// Itération 3 
+
+// for(let ev of M.getEvents("mmi1")){
+//    if(ev.title.includes("CM")){
+//    let changes = {
+//       backgroundColor : "#D31949"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TD")){
+//    let changes = {
+//       backgroundColor : "#f45464"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TP")){
+//    let changes = {
+//       backgroundColor : "#b02321"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// }
+// }
+
+// for(let ev of M.getEvents("mmi2")){
+//    if(ev.title.includes("CM")){
+//    let changes = {
+//       backgroundColor : "#00bdae"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TD")){
+//    let changes = {
+//       backgroundColor : "#1194a7"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TP")){
+//    let changes = {
+//       backgroundColor : "#10686b"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// }
+// }
 
 
-for(let ev of M.getEvents("mmi1")){
+// for(let ev of M.getEvents("mmi3")){
+//    if(ev.title.includes("CM")){
+//    let changes = {
+//       backgroundColor : "#e6dcd4"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TD")){
+//    let changes = {
+//       backgroundColor : "#bda18c"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// } if(ev.title.includes("TP")){
+//    let changes = {
+//       backgroundColor : "#3f352d"
+//    };
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+// }
+// }
+
+
+// Itération 4
+
+
+document.getElementById('select-year').addEventListener('change', function() {
+   var selectedValue = this.value;
+   V.uicalendar.clear();
+   if (selectedValue === 'year1') {
+       V.uicalendar.createEvents(M.getEvents("mmi1"));
+       for(let ev of M.getEvents("mmi1")){
    if(ev.title.includes("CM")){
    let changes = {
       backgroundColor : "#D31949"
@@ -72,43 +142,46 @@ for(let ev of M.getEvents("mmi1")){
    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
 }
 }
-
-for(let ev of M.getEvents("mmi2")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#00bdae"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#1194a7"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#10686b"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}
-}
-
-
-for(let ev of M.getEvents("mmi2")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#e6dcd4"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#bda18c"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#3f352d"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}
-}
-
+   } else if (selectedValue === 'year2') {
+       V.uicalendar.createEvents(M.getEvents("mmi2"));
+         for(let ev of M.getEvents("mmi2")){
+      if(ev.title.includes("CM")){
+      let changes = {
+         backgroundColor : "#00bdae"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   } if(ev.title.includes("TD")){
+      let changes = {
+         backgroundColor : "#1194a7"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   } if(ev.title.includes("TP")){
+      let changes = {
+         backgroundColor : "#10686b"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   }
+   }
+   } else if (selectedValue === 'year3') {
+       V.uicalendar.createEvents(M.getEvents("mmi3"));
+         for(let ev of M.getEvents("mmi3")){
+      if(ev.title.includes("CM")){
+      let changes = {
+         backgroundColor : "#e6dcd4"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   } if(ev.title.includes("TD")){
+      let changes = {
+         backgroundColor : "#bda18c"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   } if(ev.title.includes("TP")){
+      let changes = {
+         backgroundColor : "#3f352d"
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+   }
+   }
+   }
+ });
+ 
