@@ -17,6 +17,16 @@ M.getEvents = function(annee) {
     return null;
 }
 
+
+M.getEventsGroups = function(annee, groups) {
+        if (annee in Events) {
+            return Events[annee].toObjectGroup(groups);
+        }
+        return null;
+    }
+
+
+
 M.init = async function() {
     let datammi1 = await fetch('./data/mmi1.ics');
     datammi1 = await datammi1.text();

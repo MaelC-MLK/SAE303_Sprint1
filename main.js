@@ -14,7 +14,6 @@ let C = {};
 
    Exception : Afficher 1, 2 ou les 3 années de formation sans autre filtrage peut être géré uniquement au niveau de la vue.
 */
-   
 
 // loadind data (and wait for it !)
 await M.init();
@@ -41,204 +40,160 @@ await M.init();
 
 // creating events in the calendar
 
+// Itération 3
 
-C.init = function (){
+C.calendarMMI1 = function () {
+  for (let ev of M.getEvents("mmi1")) {
+    if (ev.title.includes("CM")) {
+      let changes = {
+        backgroundColor: "#D31949",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TD")) {
+      let changes = {
+        backgroundColor: "#f45464",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TP")) {
+      let changes = {
+        backgroundColor: "#b02321",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("SAÉ")) {
+      let changes = {
+        backgroundColor: "#ffb84d",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    }
+  }
+};
 
-   // Itération 3
+C.calendarMMI2 = function () {
+  for (let ev of M.getEvents("mmi2")) {
+    if (ev.title.includes("CM")) {
+      let changes = {
+        backgroundColor: "#00bdae",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TD")) {
+      let changes = {
+        backgroundColor: "#1194a7",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TP")) {
+      let changes = {
+        backgroundColor: "#10686b",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("SAÉ")) {
+      let changes = {
+        backgroundColor: "#ffd699",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    }
+  }
+};
 
-   // V.uicalendar.createEvents(M.getEvents("mmi1"));
-   // V.uicalendar.createEvents(M.getEvents("mmi2"));
-   // V.uicalendar.createEvents(M.getEvents("mmi3"));
-   V.coloradd();
-}
-
-
- C.init()
-
-// Itération 3 
-
-C.calendarMMI1 = function (){
-for(let ev of M.getEvents("mmi1")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#D31949",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#f45464",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#b02321",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("SAÉ")){
-   let changes = {
-      backgroundColor : "#000000",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}
-}
-}
-
-C.calendarMMI2 = function (){
-for(let ev of M.getEvents("mmi2")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#00bdae",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#1194a7",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#10686b",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("SAÉ")){
-   let changes = {
-      backgroundColor : "#000000",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}
-}
-}
-
-
-C.calendarMMI3 = function (){
-for(let ev of M.getEvents("mmi3")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#e6dcd4",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#bda18c",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#3f352d",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}else if(ev.title.includes("SAÉ")){
-   let changes = {
-      backgroundColor : "#000000",
-      borderColor: 'trasparence',
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-}
-}
+C.calendarMMI3 = function () {
+  for (let ev of M.getEvents("mmi3")) {
+    if (ev.title.includes("CM")) {
+      let changes = {
+        backgroundColor: "#e6dcd4",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TD")) {
+      let changes = {
+        backgroundColor: "#bda18c",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("TP")) {
+      let changes = {
+        backgroundColor: "#3f352d",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    } else if (ev.title.includes("SAÉ")) {
+      let changes = {
+        backgroundColor: "#ffebcc",
+        borderColor: "trasparence",
+      };
+      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+    }
+  }
 };
 
 // Itération 4
 
+document.getElementById("select-year").addEventListener("change", function () {
+  var selectedValue = this.value;
+  V.uicalendar.clear();
+  if (selectedValue === "all-year") {
+    V.uicalendar.createEvents(M.getEvents("mmi1"));
+    C.calendarMMI1();
+    V.uicalendar.createEvents(M.getEvents("mmi2"));
+    C.calendarMMI2();
+    V.uicalendar.createEvents(M.getEvents("mmi3"));
+    C.calendarMMI3();
+  }
 
-document.getElementById('select-year').addEventListener('change', function() {
-   var selectedValue = this.value;
-   V.uicalendar.clear();
-   if (selectedValue === 'all-year') {
-      V.uicalendar.createEvents(M.getEvents("mmi1"));
-      C.calendarMMI1();
-      V.uicalendar.createEvents(M.getEvents("mmi2"));
-      C.calendarMMI2();
-      V.uicalendar.createEvents(M.getEvents("mmi3"));
-      C.calendarMMI3();
-}
-   
- if (selectedValue === 'year1') {
-       V.uicalendar.createEvents(M.getEvents("mmi1"));
-       C.calendarMMI1();
-}
-    else if (selectedValue === 'year2') {
-       V.uicalendar.createEvents(M.getEvents("mmi2"));
-       C.calendarMMI2();
-   
-   } else if (selectedValue === 'year3') {
-       V.uicalendar.createEvents(M.getEvents("mmi3"));
-       C.calendarMMI3();
-   }
- });
- 
+  if (selectedValue === "year1") {
+    V.uicalendar.createEvents(M.getEvents("mmi1"));
+    C.calendarMMI1();
+  } else if (selectedValue === "year2") {
+    V.uicalendar.createEvents(M.getEvents("mmi2"));
+    C.calendarMMI2();
+  } else if (selectedValue === "year3") {
+    V.uicalendar.createEvents(M.getEvents("mmi3"));
+    C.calendarMMI3();
+  }
+});
 
+// Itération 5
 
- // Itération 5
-
-
-
-document.getElementById('select-group-mmi1').addEventListener('change', function() {
-   var selectedValue = this.value;
-   V.uicalendar.clear();
-   for(let ev of M.getEvents("mmi1")){
-   if (selectedValue === 'group1-mmi1') {
-      if(!ev.title.includes("G1" || "CM" || "TD1")){
-         let changes = {
-            isVisible : "True"
-         };
-         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-      }
-   }
-   else if (selectedValue === 'group2-mmi1') {
-      if(!ev.title.includes("G2" || "CM" || "TD1")){
-         let changes = {
-            isVisible : "True"
-         };
-         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-      }
-
-   } else if (selectedValue === 'group3-mmi1') {
-      if(!ev.title.includes("G3" || "CM" || "TD2")){
-         let changes = {
-            isVisible : "True"
-         };
-         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-      }
-   }
-}
-})
-;
+let mmi1 = document.getElementById("select-group-mmi1");
+  mmi1.addEventListener("change", function () {
+  V.uicalendar.clear();
+  V.uicalendar.createEvents(M.getEventsGroups("mmi1", mmi1.value));
+});
 
 
 
 
 
 
-// for(let ev of M.getEvents("mmi2")){
-//    if(!ev.title.includes("G1" || "CM" || "TD1")){
-//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-//    }else    if(!ev.title.includes("G21" || "CM" || "TD1")){
-//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-//    }else  if(!ev.title.includes("G22" || "CM" || "TD2")){
-//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-//    }else   if(!ev.title.includes("G3s" || "CM" || "TD2")){
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-// }
-// }
 
-// for(let ev of M.getEvents("mmi3")){
-//    if(!ev.title.includes("G1" || "CM" || "TD1")){
-//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-//    }else    if(!ev.title.includes("G2" || "CM" || "TD1")){
-//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-//    }else   if(!ev.title.includes("G3s" || "CM" || "TD2")){
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
-// }
-// }
 
+
+
+
+
+C.init = function () {
+  V.uicalendar.createEvents(M.getEvents("mmi1"));
+  C.calendarMMI1();
+  V.uicalendar.createEvents(M.getEvents("mmi2"));
+  C.calendarMMI2();
+  V.uicalendar.createEvents(M.getEvents("mmi3"));
+  C.calendarMMI3();
+
+  // Itération 3
+
+  // V.uicalendar.createEvents(M.getEvents("mmi1"));
+  // V.uicalendar.createEvents(M.getEvents("mmi2"));
+  // V.uicalendar.createEvents(M.getEvents("mmi3"));
+  // V.coloradd();
+};
+
+C.init();
+
+
+// MDN ARRAY CONCAT FILTERS

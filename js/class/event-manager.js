@@ -33,8 +33,6 @@ class EventManager {
     }   
 
     // retourne tous les événements de l'agenda dans un tableau d'objet dont les propriétés sont compatibles avec Toast UI Calendar
-    // (voir https://nhn.github.io/tui.calendar/latest/EventObject). On ajoute juste une propriété calendarId pour que Toast UI Calendar
-    // puisse identifier l'agenda auquel appartient l'événement
     toObject() {
         return this.#events.map(event => {
             let obj = event.toObject();
@@ -42,6 +40,15 @@ class EventManager {
             return obj;
         });
     }
+
+    toObjectGroup(groups) {
+        return this.#events.filter(event => event.groups.includes(groups))
+    };
 }
+
+
+
+
+
 
 export {EventManager};
