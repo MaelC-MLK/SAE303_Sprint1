@@ -17,13 +17,21 @@ M.getEvents = function(annee) {
     return null;
 }
 
+M.getAllEvents = function() {
+    let allEvents = [];
+    for (let annee in Events) {
+        allEvents = allEvents.concat(Events[annee].toObject());
+    }
+    return allEvents;
+}
+
 
 M.getEventsGroups = function(annee, groups) {
         if (annee in Events) {
             return Events[annee].toObjectGroup(groups);
         }
         return null;
-    }
+}
 
 
 

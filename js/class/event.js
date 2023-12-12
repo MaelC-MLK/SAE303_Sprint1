@@ -50,6 +50,13 @@ class Event {
         return this.#groups.map( gr => gr); // retourne une copie du tableau
     }
 
+    get type() {
+        let typeAbbreviations = ['CM', 'TD', 'TP']; 
+        let summaryWords = this.#summary.split(' ');
+        let eventType = typeAbbreviations.find(abbreviation => summaryWords.includes(abbreviation));
+        return eventType || 'Autre';
+    }
+
     // retourne un objet contenant les informations de l'événement
     // dans un format compatible avec Toast UI Calendar (voir https://nhn.github.io/tui.calendar/latest/EventObject)
     toObject() {
@@ -60,7 +67,8 @@ class Event {
             start: this.#start,
             end: this.#end,
             location: this.#location ,
-            groups: this.#groups
+            groups: this.#groups,
+            type: this.type
         }
     }
 }
