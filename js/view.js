@@ -57,6 +57,28 @@ V.coloradd = function() {
   });
 }
 
+// Itération 5
+
+let selectYear = document.getElementById('select-year');
+let selectGroupMMI1 = document.getElementById('select-group-mmi1');
+let selectGroupMMI2 = document.getElementById('select-group-mmi2');
+let selectGroupMMI3 = document.getElementById('select-group-mmi3');
+ selectYear.addEventListener('change', function() {
+    let selectedYear = selectYear.value;
+ 
+     selectGroupMMI1.style.display = 'none';
+     selectGroupMMI2.style.display = 'none';
+     selectGroupMMI3.style.display = 'none';
+ 
+     if (selectedYear === 'year1') {
+         selectGroupMMI1.style.display = 'block';
+     } else if (selectedYear === 'year2') {
+         selectGroupMMI2.style.display = 'block';
+     } else if (selectedYear === 'year3') {
+         selectGroupMMI3.style.display = 'block';
+     }
+ });
+
 
 document.querySelector("#prev").addEventListener("click", () => moveToNextOrPrevRange(-1));
 document.querySelector("#now").addEventListener("click", () => moveToToday());

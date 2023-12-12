@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .none{
+    display: none;
+      }
+    </style>
     <title>MMI Calendar</title>
   </head>
   <body>
@@ -15,10 +20,28 @@
         <button id="next"> → </button>
 
         <select id="select-year">
-          <option> Votre année </option>
+          <option value="all-year"> Toutes les années </option>
           <option value="year1">MMI1</option>
           <option value="year2">MMI2</option>
           <option value="year3">MMI3</option>
+        </select>
+        <select class="none" id="select-group-mmi1">
+          <option value="all-mmi1"> Tous les cours </option>
+          <option value="group1-mmi1">G1</option>
+          <option value="group2-mmi1">G2</option>>
+          <option value="group3-mmi1">G3</option>
+        </select>
+        <select class="none" id="select-group-mmi2">
+          <option value="all-mmi2">Tous les cours</option>
+          <option value="group1-mmi2">G1</option>
+          <option value="group2-mmi2">G2</option>
+          <option value="group3-mmi2">G3</option>
+        </select>
+        <select class="none" id="select-group-mmi3">
+          <option value="all-mmi1"> Tous les cours </option>
+          <option value="group1-mmi3">G1</option>
+          <option value="group2-mmi3">G2</option>
+          <option value="group3-mmi3">G3</option>
         </select>
         </nav>
       </header>

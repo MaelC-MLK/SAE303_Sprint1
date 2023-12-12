@@ -57,64 +57,96 @@ C.init = function (){
 
 // Itération 3 
 
-// for(let ev of M.getEvents("mmi1")){
-//    if(ev.title.includes("CM")){
-//    let changes = {
-//       backgroundColor : "#D31949"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TD")){
-//    let changes = {
-//       backgroundColor : "#f45464"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TP")){
-//    let changes = {
-//       backgroundColor : "#b02321"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// }
-// }
+C.calendarMMI1 = function (){
+for(let ev of M.getEvents("mmi1")){
+   if(ev.title.includes("CM")){
+   let changes = {
+      backgroundColor : "#D31949",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TD")){
+   let changes = {
+      backgroundColor : "#f45464",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TP")){
+   let changes = {
+      backgroundColor : "#b02321",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("SAÉ")){
+   let changes = {
+      backgroundColor : "#000000",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}
+}
+}
 
-// for(let ev of M.getEvents("mmi2")){
-//    if(ev.title.includes("CM")){
-//    let changes = {
-//       backgroundColor : "#00bdae"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TD")){
-//    let changes = {
-//       backgroundColor : "#1194a7"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TP")){
-//    let changes = {
-//       backgroundColor : "#10686b"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// }
-// }
+C.calendarMMI2 = function (){
+for(let ev of M.getEvents("mmi2")){
+   if(ev.title.includes("CM")){
+   let changes = {
+      backgroundColor : "#00bdae",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TD")){
+   let changes = {
+      backgroundColor : "#1194a7",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TP")){
+   let changes = {
+      backgroundColor : "#10686b",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("SAÉ")){
+   let changes = {
+      backgroundColor : "#000000",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}
+}
+}
 
 
-// for(let ev of M.getEvents("mmi3")){
-//    if(ev.title.includes("CM")){
-//    let changes = {
-//       backgroundColor : "#e6dcd4"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TD")){
-//    let changes = {
-//       backgroundColor : "#bda18c"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// } if(ev.title.includes("TP")){
-//    let changes = {
-//       backgroundColor : "#3f352d"
-//    };
-//    V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-// }
-// }
-
+C.calendarMMI3 = function (){
+for(let ev of M.getEvents("mmi3")){
+   if(ev.title.includes("CM")){
+   let changes = {
+      backgroundColor : "#e6dcd4",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TD")){
+   let changes = {
+      backgroundColor : "#bda18c",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("TP")){
+   let changes = {
+      backgroundColor : "#3f352d",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}else if(ev.title.includes("SAÉ")){
+   let changes = {
+      backgroundColor : "#000000",
+      borderColor: 'trasparence',
+   };
+   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+}
+}
+};
 
 // Itération 4
 
@@ -122,66 +154,91 @@ C.init = function (){
 document.getElementById('select-year').addEventListener('change', function() {
    var selectedValue = this.value;
    V.uicalendar.clear();
-   if (selectedValue === 'year1') {
+   if (selectedValue === 'all-year') {
+      V.uicalendar.createEvents(M.getEvents("mmi1"));
+      C.calendarMMI1();
+      V.uicalendar.createEvents(M.getEvents("mmi2"));
+      C.calendarMMI2();
+      V.uicalendar.createEvents(M.getEvents("mmi3"));
+      C.calendarMMI3();
+}
+   
+ if (selectedValue === 'year1') {
        V.uicalendar.createEvents(M.getEvents("mmi1"));
-       for(let ev of M.getEvents("mmi1")){
-   if(ev.title.includes("CM")){
-   let changes = {
-      backgroundColor : "#D31949"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TD")){
-   let changes = {
-      backgroundColor : "#f45464"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-} if(ev.title.includes("TP")){
-   let changes = {
-      backgroundColor : "#b02321"
-   };
-   V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+       C.calendarMMI1();
 }
-}
-   } else if (selectedValue === 'year2') {
+    else if (selectedValue === 'year2') {
        V.uicalendar.createEvents(M.getEvents("mmi2"));
-         for(let ev of M.getEvents("mmi2")){
-      if(ev.title.includes("CM")){
-      let changes = {
-         backgroundColor : "#00bdae"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   } if(ev.title.includes("TD")){
-      let changes = {
-         backgroundColor : "#1194a7"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   } if(ev.title.includes("TP")){
-      let changes = {
-         backgroundColor : "#10686b"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   }
-   }
+       C.calendarMMI2();
+   
    } else if (selectedValue === 'year3') {
        V.uicalendar.createEvents(M.getEvents("mmi3"));
-         for(let ev of M.getEvents("mmi3")){
-      if(ev.title.includes("CM")){
-      let changes = {
-         backgroundColor : "#e6dcd4"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   } if(ev.title.includes("TD")){
-      let changes = {
-         backgroundColor : "#bda18c"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   } if(ev.title.includes("TP")){
-      let changes = {
-         backgroundColor : "#3f352d"
-      };
-      V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
-   }
-   }
+       C.calendarMMI3();
    }
  });
  
+
+
+ // Itération 5
+
+
+
+document.getElementById('select-group-mmi1').addEventListener('change', function() {
+   var selectedValue = this.value;
+   V.uicalendar.clear();
+   for(let ev of M.getEvents("mmi1")){
+   if (selectedValue === 'group1-mmi1') {
+      if(!ev.title.includes("G1" || "CM" || "TD1")){
+         let changes = {
+            isVisible : "True"
+         };
+         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+      }
+   }
+   else if (selectedValue === 'group2-mmi1') {
+      if(!ev.title.includes("G2" || "CM" || "TD1")){
+         let changes = {
+            isVisible : "True"
+         };
+         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+      }
+
+   } else if (selectedValue === 'group3-mmi1') {
+      if(!ev.title.includes("G3" || "CM" || "TD2")){
+         let changes = {
+            isVisible : "True"
+         };
+         V.uicalendar.updateEvent(ev.id, ev.calendarId, changes);
+      }
+   }
+}
+})
+;
+
+
+
+
+
+
+// for(let ev of M.getEvents("mmi2")){
+//    if(!ev.title.includes("G1" || "CM" || "TD1")){
+//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+//    }else    if(!ev.title.includes("G21" || "CM" || "TD1")){
+//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+//    }else  if(!ev.title.includes("G22" || "CM" || "TD2")){
+//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+//    }else   if(!ev.title.includes("G3s" || "CM" || "TD2")){
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+// }
+// }
+
+// for(let ev of M.getEvents("mmi3")){
+//    if(!ev.title.includes("G1" || "CM" || "TD1")){
+//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+//    }else    if(!ev.title.includes("G2" || "CM" || "TD1")){
+//       V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+//    }else   if(!ev.title.includes("G3s" || "CM" || "TD2")){
+//    V.uicalendar.updateEvent(ev.id, ev.calendarId, isVisible = false);
+// }
+// }
+
