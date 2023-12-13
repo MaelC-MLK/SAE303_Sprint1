@@ -18,113 +18,122 @@ let C = {};
 // loadind data (and wait for it !)
 await M.init();
 
-// sample events for testing
-// let edt = [
-//   {
-//     id: '1',
-//     calendarId: '1',
-//     title: 'my event',
-//     category: 'time',
-//     start: '2023-12-11T08:30:00',
-//     end: '2023-12-11T10:30:00',
-//   },
-//   {
-//     id: '2',
-//     calendarId: '1',
-//     title: 'second event',
-//     category: 'time',
-//     start: '2023-12-13T14:00:00',
-//     end: '2023-12-13T15:30:00',
-//   },
-// ]
-
-// creating events in the calendar
-
 // Itération 3
-
-let colorMap = {
-  'mmi1':{ CM : '#D31949', TD : '#f45464', TP : '#b02321', Autre : '#ffb84d'},
-  'mmi2':{ CM : '#00bdae', TD : '#1194a7', TP : '#10686b', Autre : '#ffd699'},
-  'mmi3':{ CM : '#e6dcd4', TD : '#bda18c', TP : '#3f352d', Autre : '#ffebcc'},
+C.colorcalendar = function (calendar) {
+  let colorMap = {
+    mmi1: { CM: "#D31949", TD: "#f45464", TP: "#b02321", Autre: "#ffb84d" },
+    mmi2: { CM: "#00bdae", TD: "#1194a7", TP: "#10686b", Autre: "#ffd699" },
+    mmi3: { CM: "#e6dcd4", TD: "#bda18c", TP: "#3f352d", Autre: "#ffebcc" },
+  };
+  for (let ev of calendar) {
+    let color = colorMap[ev.calendarId][ev.type];
+    ev.backgroundColor = color;
+    ev.borderColor = "trasparence";
+  }
 };
-
-C.colorcalendar = function(calendar){
-  for(let ev of calendar) {
-  console.log(ev);
-  let color = colorMap[ev.calendarId][ev.type];
-  ev.backgroundColor = color;
-  ev.borderColor = "trasparence";
-}
-};
-
 
 // Itération 4
-
-document.getElementById("select-year").addEventListener("change", function () {
-  var selectedValue = this.value;
-  let mmi1 = M.getEvents("mmi1");
-  let mmi2 = M.getEvents("mmi2");
-  let mmi3 = M.getEvents("mmi3");
-  V.uicalendar.clear();
-  if (selectedValue === "all-year") {
+C.selectYear = function () {
+  let tab = [];
+  let annee = document.getElementById("select-year");
+  annee.addEventListener("change", function () {
+    var selectedValue = annee.value;
     V.uicalendar.clear();
-    V.uicalendar.createEvents(mmi1);
-    C.colorcalendar(mmi1);
-    V.uicalendar.createEvents(mmi2);
-    C.colorcalendar(mmi2);
-    V.uicalendar.createEvents(mmi3);
-    C.colorcalendar(mmi3);
-  }
-  if (selectedValue === "year1") {
-    V.uicalendar.clear();
-    V.uicalendar.createEvents(mmi1);
-    C.colorcalendar(mmi1);
-  } else if (selectedValue === "year2") {
-    V.uicalendar.clear();
-    V.uicalendar.createEvents(mmi2);
-    C.colorcalendar(mmi2);
-  } else if (selectedValue === "year3") {
-    V.uicalendar.clear();
-    V.uicalendar.createEvents(mmi3);
-    C.colorcalendar(mmi3);
-  }
-});
-
-
-
+    if (selectedValue === "all-year") {
+      V.uicalendar.clear();
+      tab = M.getEvents("mmi1").concat(
+        M.getEvents("mmi2").concat(M.getEvents("mmi3"))
+      );
+      C.colorcalendar(tab);
+      V.uicalendar.createEvents(tab);
+    } else if (selectedValue === "year1") {
+      V.uicalendar.clear();
+      tab = M.getEvents("mmi1");
+      C.colorcalendar(tab);
+      V.uicalendar.createEvents(tab);
+    } else if (selectedValue === "year2") {
+      V.uicalendar.clear();
+      tab = M.getEvents("mmi2");
+      C.colorcalendar(tab);
+      V.uicalendar.createEvents(tab);
+    } else if (selectedValue === "year3") {
+      V.uicalendar.clear();
+      tab = M.getEvents("mmi3");
+      C.colorcalendar(tab);
+      V.uicalendar.createEvents(tab);
+    }
+  });
+};
 
 // Itération 5
-
-function FilterCreateEvents(selectElement, year) {
+C.FilterCreateEventsByGroups = function (selectElement, year) {
   selectElement.addEventListener("change", function () {
-      let selectedValue = this.value;
-      let filteredEvents = [];
-      for (let ev of M.getEvents(year)) {
-          if (ev.groups.includes(selectedValue)) {
-              filteredEvents.push(ev);
-          }
-      }
-      V.uicalendar.clear();
+    let selectedValue = this.value;
+    let filteredEvents = [];
+    if(selectedValue === "all-groups") {
+      filteredEvents = M.getEvents(year);
+      C.colorcalendar(filteredEvents);
       V.uicalendar.createEvents(filteredEvents);
+    }else 
+    for (let ev of M.getEvents(year)) {
+      if (ev.groups.includes(selectedValue)) {
+        filteredEvents.push(ev);
+      }
+    }
+    V.uicalendar.clear();
+    C.colorcalendar(filteredEvents);
+    V.uicalendar.createEvents(filteredEvents);
   });
 }
 
-let mmi1 = document.getElementById("select-group-mmi1");
-FilterCreateEvents(mmi1, "mmi1");
-let mmi2 = document.getElementById("select-group-mmi2");
-FilterCreateEvents(mmi2, "mmi2");
-let mmi3 = document.getElementById("select-group-mmi3");
-FilterCreateEvents(mmi3, "mmi3");
+// Itération 6
+C.SearchEvent = function () {
+
+function filterEvents(searchValue) {
+  searchValue = searchValue.toLowerCase();
+  let allEvents = M.getAllEvents();
+  return allEvents.filter(event =>
+      event.ressource.toLowerCase().includes(searchValue) ||
+      event.enseignant.toLowerCase().includes(searchValue) ||
+      event.location.toLowerCase().includes(searchValue)
+  );
+}
+
+let searchBar = document.getElementById("search-barre");
+searchBar.addEventListener("keyup", function (event) {
+  let searchValue = event.target.value;
+  let filteredEvents = filterEvents(searchValue);
+  V.uicalendar.clear();
+  C.colorcalendar(filteredEvents);
+  V.uicalendar.createEvents(filteredEvents);
+
+});
+}
+
+// Itération 7
+
+
+
 
 
 
 C.init = function () {
-  let all = M.getAllEvents()
+  C.selectYear();
+  let mmi1 = document.getElementById("select-group-mmi1");
+  C.FilterCreateEventsByGroups(mmi1, "mmi1");
+  let mmi2 = document.getElementById("select-group-mmi2");
+  C.FilterCreateEventsByGroups(mmi2, "mmi2");
+  let mmi3 = document.getElementById("select-group-mmi3");
+  C.FilterCreateEventsByGroups(mmi3, "mmi3");
+
+  V.uicalendar.clear();
+  let all = M.getEvents("mmi1").concat(
+    M.getEvents("mmi2").concat(M.getEvents("mmi3"))
+  );
   C.colorcalendar(all);
   V.uicalendar.createEvents(all);
+  console.log(all);
+  C.SearchEvent();
 };
 
 C.init();
-
-
-
