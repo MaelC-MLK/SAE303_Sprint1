@@ -19,16 +19,22 @@ C.colorcalendar = function (calendar) {
   }
 };
 
-// Itération 4
-
+// Itération 4 / Itération 10 avec localstorage
 C.selectYear = function () {
   let selectYear = document.getElementById("select-year");
-  let tab = []; // Déclaration de la variable tab ici
+  let tab = [];
 
+  if(localStorage.getItem("year")){
+    selectYear.value = localStorage.getItem("year");
+    V.uicalendar.clear();
+    tab = M.getEvents(localStorage.getItem("year"));
+    C.colorcalendar(tab);
+    V.uicalendar.createEvents(tab);
+
+  }
   selectYear.addEventListener("change", function () {
     let selectedValue = selectYear.value;
     V.uicalendar.clear();
-
     if (selectedValue === "all-year") {
       tab = M.getEvents("mmi1").concat(
         M.getEvents("mmi2"),
@@ -37,9 +43,9 @@ C.selectYear = function () {
     } else {
       tab = M.getEvents(selectedValue);
     }
-
     C.colorcalendar(tab);
     V.uicalendar.createEvents(tab);
+    localStorage.setItem("year", selectedValue);
   });
 };
 
@@ -124,7 +130,6 @@ C.ViewPer = function () {
 };
 
 // Itération 8 / Itération 10 avec localstorage
-
 C.ViewPerLS = function () {
   let selectView = document.getElementById("select-view");
   if (localStorage.getItem("view")) {
@@ -146,7 +151,8 @@ C.ControlViewMobile = function () {
   }
 };
 
-// Itération 10 / Itération qui est intégrée à l'itération 8 
+// Itération 10 / Itération qui est intégrée à l'itération 8 et Itération 4 
+
 
 C.init = function () {
   let all = M.getEvents("mmi1").concat(
@@ -158,15 +164,19 @@ C.init = function () {
   C.filterCreateEventsByGroups(mmi2, "mmi2");
   let mmi3 = document.getElementById("select-group-mmi3");
   C.filterCreateEventsByGroups(mmi3, "mmi3");
-
   V.uicalendar.clear();
   C.colorcalendar(all);
-  V.uicalendar.createEvents(all);
   C.selectYear();
   C.searchEventall();
   C.ViewPerLS();
   C.ControlViewMobile();
   console.log(all);
+
+  let selectYear = document.getElementById("select-year");
+  V.filtergroups();
+  selectYear.addEventListener("change", function () {
+    V.filtergroups();
+  });
 };
 
 C.init();

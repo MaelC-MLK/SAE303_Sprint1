@@ -60,11 +60,12 @@ V.coloradd = function() {
 
 // Itération 5
 
+V.filtergroups = function() {
+
 let selectYear = document.getElementById('select-year');
 let selectGroupMMI1 = document.getElementById('select-group-mmi1');
 let selectGroupMMI2 = document.getElementById('select-group-mmi2');
 let selectGroupMMI3 = document.getElementById('select-group-mmi3');
- selectYear.addEventListener('change', function() {
     let selectedYear = selectYear.value;
  
      selectGroupMMI1.style.display = 'none';
@@ -78,7 +79,7 @@ let selectGroupMMI3 = document.getElementById('select-group-mmi3');
      } else if (selectedYear === 'mmi3') {
          selectGroupMMI3.style.display = 'block';
      }
- });
+}
 
 
 document.querySelector("#prev").addEventListener("click", () => moveToNextOrPrevRange(-1));
