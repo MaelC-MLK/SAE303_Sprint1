@@ -15,7 +15,7 @@ class Event {
         this.#description = description;
         this.#start = new Date(start);
         this.#end = new Date(end);
-        this.#location = location;
+        this.#location = location.toLowerCase();
 
         this.#groups = summary.slice(summary.lastIndexOf(',')+1);
         this.#groups = this.#groups.split('.');
@@ -56,6 +56,27 @@ class Event {
         let eventType = typeAbbreviations.find(abbreviation => summaryWords.includes(abbreviation));
         return eventType || 'Autre';
     }
+    
+    get enseignant() {
+        let titleWords = this.#summary.toLowerCase().split(' ');
+        if (titleWords.length >= 2) {
+            let enseignantName = titleWords.slice(-2).join(' ');
+            return enseignantName;
+        } else {
+            return 'Non spécifié';
+        }
+    }
+
+    get ressource() {
+        let titleWords = this.#summary.toLowerCase().split(' ');
+        let numberOfWordsForRessource = 1;
+        if (titleWords.length >= numberOfWordsForRessource) {
+            let ressourceName = titleWords.slice(0, numberOfWordsForRessource).join(' ');
+            return ressourceName;
+        } else {
+            return 'Non spécifié';
+        }
+    }
 
     // retourne un objet contenant les informations de l'événement
     // dans un format compatible avec Toast UI Calendar (voir https://nhn.github.io/tui.calendar/latest/EventObject)
@@ -68,7 +89,9 @@ class Event {
             end: this.#end,
             location: this.#location ,
             groups: this.#groups,
-            type: this.type
+            type: this.type,
+            enseignant: this.enseignant,
+            ressource: this.ressource,
         }
     }
 }

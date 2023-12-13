@@ -25,6 +25,20 @@ M.getAllEvents = function() {
     return allEvents;
 }
 
+M.getEventsByLocations = function(locations) {
+    let allEvents = M.getAllEvents();
+    return allEvents.filter(event => locations.includes(event.location));
+}
+
+M.getEventsByEnseignant = function(enseignant) {
+    let allEvents = M.getAllEvents();
+    return allEvents.filter(event => event.enseignant.includes(enseignant));
+}
+
+M.getEventsByRessource = function(ressource) {
+    let allEvents = M.getAllEvents();
+    return allEvents.filter(event => event.ressource.includes(ressource));
+}
 
 M.getEventsGroups = function(annee, groups) {
         if (annee in Events) {
@@ -33,7 +47,9 @@ M.getEventsGroups = function(annee, groups) {
         return null;
 }
 
-
+M.FilterByText = function (input){
+    
+}
 
 M.init = async function() {
     let datammi1 = await fetch('./data/mmi1.ics');
