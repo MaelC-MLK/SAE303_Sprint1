@@ -66,7 +66,7 @@ C.selectYear = function () {
 };
 
 // Itération 5
-C.FilterCreateEventsByGroups = function (selectElement, year) {
+C.filterCreateEventsByGroups = function (selectElement, year) {
   selectElement.addEventListener("change", function () {
     let selectedValue = this.value;
     let filteredEvents = [];
@@ -87,7 +87,7 @@ C.FilterCreateEventsByGroups = function (selectElement, year) {
 }
 
 // Itération 6
-C.SearchEvent = function () {
+C.searchEvent = function () {
 
 function filterEvents(searchValue) {
   searchValue = searchValue.toLowerCase();
@@ -111,21 +111,55 @@ searchBar.addEventListener("keyup", function (event) {
 }
 
 // Itération 7
+C.searchEventall = function () {
 
+  function filterEvents(searchValue) {
+      let keywords = searchValue.toLowerCase().split(' ');
+      let allEvents = M.getAllEvents();
 
+      return allEvents.filter(event =>
+          keywords.every(keyword =>
+              event.ressource.toLowerCase().includes(keyword) ||
+              event.enseignant.toLowerCase().includes(keyword) ||
+              event.location.toLowerCase().includes(keyword)
+          )
+      );
+  }
 
+  let searchBar = document.getElementById("search-barre");
+  searchBar.addEventListener("keyup", function (event) {
+      let searchValue = event.target.value;
+      let filteredEvents = filterEvents(searchValue);
+      V.uicalendar.clear();
+      C.colorcalendar(filteredEvents);
+      V.uicalendar.createEvents(filteredEvents);
+  });
 
+}
 
+// Itération 8
+C.ViewPer = function () {
+let selectView = document.getElementById("select-view");
+selectView.addEventListener("change", function(event) {
+    let selectedView = event.target.value;
+    V.uicalendar.changeView(selectedView);
+});
+}
+
+// Itération 9
+C.ControlViewMobile = function () {
+if(window.innerWidth < 768) {
+  V.uicalendar.changeView("day");}
+}
 
 C.init = function () {
   C.selectYear();
   let mmi1 = document.getElementById("select-group-mmi1");
-  C.FilterCreateEventsByGroups(mmi1, "mmi1");
+  C.filterCreateEventsByGroups(mmi1, "mmi1");
   let mmi2 = document.getElementById("select-group-mmi2");
-  C.FilterCreateEventsByGroups(mmi2, "mmi2");
+  C.filterCreateEventsByGroups(mmi2, "mmi2");
   let mmi3 = document.getElementById("select-group-mmi3");
-  C.FilterCreateEventsByGroups(mmi3, "mmi3");
-
+  C.filterCreateEventsByGroups(mmi3, "mmi3");
   V.uicalendar.clear();
   let all = M.getEvents("mmi1").concat(
     M.getEvents("mmi2").concat(M.getEvents("mmi3"))
@@ -133,7 +167,10 @@ C.init = function () {
   C.colorcalendar(all);
   V.uicalendar.createEvents(all);
   console.log(all);
-  C.SearchEvent();
+  C.searchEventall();
+  C.ViewPer();
+  C.ControlViewMobile();
 };
 
 C.init();
+  

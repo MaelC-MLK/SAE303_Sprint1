@@ -7,6 +7,12 @@
       .none{
     display: none;
       }
+
+      @media screen and (max-width: 768px){
+        body{
+          background-color: blue;
+        }
+      }
     </style>
     <title>MMI Calendar</title>
   </head>
@@ -18,7 +24,6 @@
         <button id="prev"> ← </button>
         <button id="now"> O </button>
         <button id="next"> → </button>
-
 
         <select id="select-year">
           <option value="all-year"> Toutes les années </option>
@@ -51,6 +56,12 @@
           <option value="BUT3-G21">BUT3-G21</option>
           <option value="BUT3-G22">BUT3-G22</option>
           <option value="BUT3-G3">BUT3-G3</option>
+        </select>
+
+        <select id="select-view">
+          <option value="day">Jour</option>
+          <option value="week" selected>Semaine</option>
+          <option value="month">Mois</option>
         </select>
 
         <input type="text" id="search-barre" placeholder="Recherchez ici">
