@@ -24,7 +24,8 @@ V.uicalendar = new Calendar('#calendar', {
   },
 });
 
- 
+// Itération 2 
+
 function moveToNextOrPrevRange(indice) {
   if (indice === -1) {
     V.uicalendar.prev();
@@ -70,11 +71,11 @@ let selectGroupMMI3 = document.getElementById('select-group-mmi3');
      selectGroupMMI2.style.display = 'none';
      selectGroupMMI3.style.display = 'none';
  
-     if (selectedYear === 'year1') {
+     if (selectedYear === 'mmi1') {
          selectGroupMMI1.style.display = 'block';
-     } else if (selectedYear === 'year2') {
+     } else if (selectedYear === 'mmi2') {
          selectGroupMMI2.style.display = 'block';
-     } else if (selectedYear === 'year3') {
+     } else if (selectedYear === 'mmi3') {
          selectGroupMMI3.style.display = 'block';
      }
  });

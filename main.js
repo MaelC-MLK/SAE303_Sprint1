@@ -2,20 +2,7 @@ import { M } from "./js/model.js";
 import { V } from "./js/view.js";
 
 let C = {};
-/*
-   Ce fichier correspond au contrôleur de l'application. Il est chargé de faire le lien entre le modèle et la vue.
-   Le modèle et la vue sont définis dans les fichiers js/model.js et js/view.js et importés (M et V, parties "publiques") dans ce fichier.
-   Le modèle contient les données (les événements des 3 années de MMI).
-   La vue contient tout ce qui est propre à l'interface et en particulier le composant Toast UI Calendar.
-   Le principe sera toujours le même : le contrôleur va récupérer les données du modèle et les passer à la vue.
-   Toute opération de filtrage des données devra être définie dans le modèle.
-   Et en fonction des actions de l'utilisateur, le contrôleur pourra demander au modèle de lui retourner des données filtrées
-   pour ensuite les passer à la vue pour affichage.
 
-   Exception : Afficher 1, 2 ou les 3 années de formation sans autre filtrage peut être géré uniquement au niveau de la vue.
-*/
-
-// loadind data (and wait for it !)
 await M.init();
 
 // Itération 3
@@ -33,35 +20,26 @@ C.colorcalendar = function (calendar) {
 };
 
 // Itération 4
+
 C.selectYear = function () {
-  let tab = [];
-  let annee = document.getElementById("select-year");
-  annee.addEventListener("change", function () {
-    var selectedValue = annee.value;
+  let selectYear = document.getElementById("select-year");
+  let tab = []; // Déclaration de la variable tab ici
+
+  selectYear.addEventListener("change", function () {
+    let selectedValue = selectYear.value;
     V.uicalendar.clear();
+
     if (selectedValue === "all-year") {
-      V.uicalendar.clear();
       tab = M.getEvents("mmi1").concat(
-        M.getEvents("mmi2").concat(M.getEvents("mmi3"))
+        M.getEvents("mmi2"),
+        M.getEvents("mmi3")
       );
-      C.colorcalendar(tab);
-      V.uicalendar.createEvents(tab);
-    } else if (selectedValue === "year1") {
-      V.uicalendar.clear();
-      tab = M.getEvents("mmi1");
-      C.colorcalendar(tab);
-      V.uicalendar.createEvents(tab);
-    } else if (selectedValue === "year2") {
-      V.uicalendar.clear();
-      tab = M.getEvents("mmi2");
-      C.colorcalendar(tab);
-      V.uicalendar.createEvents(tab);
-    } else if (selectedValue === "year3") {
-      V.uicalendar.clear();
-      tab = M.getEvents("mmi3");
-      C.colorcalendar(tab);
-      V.uicalendar.createEvents(tab);
+    } else {
+      tab = M.getEvents(selectedValue);
     }
+
+    C.colorcalendar(tab);
+    V.uicalendar.createEvents(tab);
   });
 };
 
@@ -70,107 +48,125 @@ C.filterCreateEventsByGroups = function (selectElement, year) {
   selectElement.addEventListener("change", function () {
     let selectedValue = this.value;
     let filteredEvents = [];
-    if(selectedValue === "all-groups") {
+    if (selectedValue === "all-groups") {
       filteredEvents = M.getEvents(year);
       C.colorcalendar(filteredEvents);
       V.uicalendar.createEvents(filteredEvents);
-    }else 
-    for (let ev of M.getEvents(year)) {
-      if (ev.groups.includes(selectedValue)) {
-        filteredEvents.push(ev);
+    } else
+      for (let ev of M.getEvents(year)) {
+        if (ev.groups.includes(selectedValue)) {
+          filteredEvents.push(ev);
+        }
       }
-    }
     V.uicalendar.clear();
     C.colorcalendar(filteredEvents);
     V.uicalendar.createEvents(filteredEvents);
   });
-}
+};
 
 // Itération 6
 C.searchEvent = function () {
-
-function filterEvents(searchValue) {
-  searchValue = searchValue.toLowerCase();
-  let allEvents = M.getAllEvents();
-  return allEvents.filter(event =>
-      event.ressource.toLowerCase().includes(searchValue) ||
-      event.enseignant.toLowerCase().includes(searchValue) ||
-      event.location.toLowerCase().includes(searchValue)
-  );
-}
-
-let searchBar = document.getElementById("search-barre");
-searchBar.addEventListener("keyup", function (event) {
-  let searchValue = event.target.value;
-  let filteredEvents = filterEvents(searchValue);
-  V.uicalendar.clear();
-  C.colorcalendar(filteredEvents);
-  V.uicalendar.createEvents(filteredEvents);
-
-});
-}
-
-// Itération 7
-C.searchEventall = function () {
-
   function filterEvents(searchValue) {
-      let keywords = searchValue.toLowerCase().split(' ');
-      let allEvents = M.getAllEvents();
-
-      return allEvents.filter(event =>
-          keywords.every(keyword =>
-              event.ressource.toLowerCase().includes(keyword) ||
-              event.enseignant.toLowerCase().includes(keyword) ||
-              event.location.toLowerCase().includes(keyword)
-          )
-      );
+    searchValue = searchValue.toLowerCase();
+    let allEvents = M.getAllEvents();
+    return allEvents.filter(
+      (event) =>
+        event.ressource.toLowerCase().includes(searchValue) ||
+        event.enseignant.toLowerCase().includes(searchValue) ||
+        event.location.toLowerCase().includes(searchValue)
+    );
   }
 
   let searchBar = document.getElementById("search-barre");
   searchBar.addEventListener("keyup", function (event) {
-      let searchValue = event.target.value;
-      let filteredEvents = filterEvents(searchValue);
-      V.uicalendar.clear();
-      C.colorcalendar(filteredEvents);
-      V.uicalendar.createEvents(filteredEvents);
+    let searchValue = event.target.value;
+    let filteredEvents = filterEvents(searchValue);
+    V.uicalendar.clear();
+    C.colorcalendar(filteredEvents);
+    V.uicalendar.createEvents(filteredEvents);
   });
+};
 
-}
+// Itération 7
+C.searchEventall = function () {
+  function filterEvents(searchValue) {
+    let keywords = searchValue.toLowerCase().split(" ");
+    let allEvents = M.getAllEvents();
+
+    return allEvents.filter((event) =>
+      keywords.every(
+        (keyword) =>
+          event.ressource.toLowerCase().includes(keyword) ||
+          event.enseignant.toLowerCase().includes(keyword) ||
+          event.location.toLowerCase().includes(keyword)
+      )
+    );
+  }
+
+  let searchBar = document.getElementById("search-barre");
+  searchBar.addEventListener("keyup", function (event) {
+    let searchValue = event.target.value;
+    let filteredEvents = filterEvents(searchValue);
+    V.uicalendar.clear();
+    C.colorcalendar(filteredEvents);
+    V.uicalendar.createEvents(filteredEvents);
+  });
+};
 
 // Itération 8
 C.ViewPer = function () {
-let selectView = document.getElementById("select-view");
-selectView.addEventListener("change", function(event) {
+  let selectView = document.getElementById("select-view");
+  localStorage.setItem("view", selectView.value);
+  selectView.addEventListener("change", function (event) {
     let selectedView = event.target.value;
     V.uicalendar.changeView(selectedView);
-});
-}
+  });
+};
+
+// Itération 8 / Itération 10 avec localstorage
+
+C.ViewPerLS = function () {
+  let selectView = document.getElementById("select-view");
+  if (localStorage.getItem("view")) {
+    let storedView = localStorage.getItem("view");
+    selectView.value = storedView;
+    V.uicalendar.changeView(storedView);
+  }
+  selectView.addEventListener("change", function (event) {
+    let selectedView = event.target.value;
+    localStorage.setItem("view", selectedView);
+    V.uicalendar.changeView(selectedView);
+  });
+};
 
 // Itération 9
 C.ControlViewMobile = function () {
-if(window.innerWidth < 768) {
-  V.uicalendar.changeView("day");}
-}
+  if (window.innerWidth < 768) {
+    V.uicalendar.changeView("day");
+  }
+};
+
+// Itération 10 / Itération qui est intégrée à l'itération 8 
 
 C.init = function () {
-  C.selectYear();
+  let all = M.getEvents("mmi1").concat(
+    M.getEvents("mmi2").concat(M.getEvents("mmi3"))
+  );
   let mmi1 = document.getElementById("select-group-mmi1");
   C.filterCreateEventsByGroups(mmi1, "mmi1");
   let mmi2 = document.getElementById("select-group-mmi2");
   C.filterCreateEventsByGroups(mmi2, "mmi2");
   let mmi3 = document.getElementById("select-group-mmi3");
   C.filterCreateEventsByGroups(mmi3, "mmi3");
+
   V.uicalendar.clear();
-  let all = M.getEvents("mmi1").concat(
-    M.getEvents("mmi2").concat(M.getEvents("mmi3"))
-  );
   C.colorcalendar(all);
   V.uicalendar.createEvents(all);
-  console.log(all);
+  C.selectYear();
   C.searchEventall();
-  C.ViewPer();
+  C.ViewPerLS();
   C.ControlViewMobile();
+  console.log(all);
 };
 
 C.init();
-  

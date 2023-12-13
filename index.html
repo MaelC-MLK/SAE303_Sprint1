@@ -7,18 +7,11 @@
       .none{
     display: none;
       }
-
-      @media screen and (max-width: 768px){
-        body{
-          background-color: blue;
-        }
-      }
     </style>
     <title>MMI Calendar</title>
   </head>
   <body>
   
-    <div>
       <header>
         <nav>
         <button id="prev"> ← </button>
@@ -27,10 +20,11 @@
 
         <select id="select-year">
           <option value="all-year"> Toutes les années </option>
-          <option value="year1">MMI1</option>
-          <option value="year2">MMI2</option>
-          <option value="year3">MMI3</option>
+          <option value="mmi1">MMI1</option>
+          <option value="mmi2">MMI2</option>
+          <option value="mmi3">MMI3</option>
         </select>
+
 
         <select class="none" id="select-group-mmi1">
           <option value="all-groups"> Tous les cours </option>
@@ -38,10 +32,7 @@
           <option value="BUT1-G21">BUT1-G21</option>>
           <option value="BUT1-G22">BUT1-G22</option>
           <option value="BUT1-G3">BUT1-G3</option>>
-          <!-- <option value="BUT1-G41">BUT1-G41</option>
-          <option value="BUT1-G42">BUT1-G42</option> -->
         </select>
-
         <select class="none" id="select-group-mmi2">
           <option value="all-groups">Tous les cours</option>
           <option value="BUT2-G1">BUT2-G1</option>
@@ -49,7 +40,6 @@
           <option value="BUT2-G22">BUT2-G22</option>
           <option value="BUT2-G3">BUT2-G3</option>
         </select>
-
         <select class="none" id="select-group-mmi3">
           <option value="all-groups"> Tous les cours </option>
           <option value="BUT3-G1">BUT3-G1</option>
@@ -57,20 +47,15 @@
           <option value="BUT3-G22">BUT3-G22</option>
           <option value="BUT3-G3">BUT3-G3</option>
         </select>
-
         <select id="select-view">
           <option value="day">Jour</option>
           <option value="week" selected>Semaine</option>
           <option value="month">Mois</option>
         </select>
-
         <input type="text" id="search-barre" placeholder="Recherchez ici">
-
         </nav>
       </header>
-
       <main id="calendar" style="height: 100vh"></main>
-    </div>
 
     <script type="module" src="/main.js"></script>
     

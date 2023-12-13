@@ -25,30 +25,13 @@ M.getAllEvents = function() {
     return allEvents;
 }
 
-M.getEventsByLocations = function(locations) {
-    let allEvents = M.getAllEvents();
-    return allEvents.filter(event => locations.includes(event.location));
-}
-
-M.getEventsByEnseignant = function(enseignant) {
-    let allEvents = M.getAllEvents();
-    return allEvents.filter(event => event.enseignant.includes(enseignant));
-}
-
-M.getEventsByRessource = function(ressource) {
-    let allEvents = M.getAllEvents();
-    return allEvents.filter(event => event.ressource.includes(ressource));
-}
+// Itération 2 
 
 M.getEventsGroups = function(annee, groups) {
         if (annee in Events) {
             return Events[annee].toObjectGroup(groups);
         }
         return null;
-}
-
-M.FilterByText = function (input){
-    
 }
 
 M.init = async function() {
