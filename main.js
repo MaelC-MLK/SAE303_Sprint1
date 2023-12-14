@@ -18,19 +18,22 @@ C.colorcalendar = function (calendar) {
     ev.borderColor = "trasparence";
   }
 };
-
 // Itération 4 / Itération 10 avec localstorage
 C.selectYear = function () {
   let selectYear = document.getElementById("select-year");
   let tab = [];
-
-  if(localStorage.getItem("year")){
+  if (localStorage.getItem("year") === "all-year") {
+    selectYear.value = "all-year";
+    V.uicalendar.clear();
+    tab = M.getEvents("mmi1").concat(M.getEvents("mmi2"), M.getEvents("mmi3"));
+    C.colorcalendar(tab);
+    V.uicalendar.createEvents(tab);
+  } else if (localStorage.getItem("year")) {
     selectYear.value = localStorage.getItem("year");
     V.uicalendar.clear();
     tab = M.getEvents(localStorage.getItem("year"));
     C.colorcalendar(tab);
     V.uicalendar.createEvents(tab);
-
   }
   selectYear.addEventListener("change", function () {
     let selectedValue = selectYear.value;
@@ -48,28 +51,29 @@ C.selectYear = function () {
     localStorage.setItem("year", selectedValue);
   });
 };
-
-// Itération 5
+// Itération 5 / Itération 10 avec localstorage
 C.filterCreateEventsByGroups = function (selectElement, year) {
   selectElement.addEventListener("change", function () {
     let selectedValue = this.value;
     let filteredEvents = [];
+
     if (selectedValue === "all-groups") {
       filteredEvents = M.getEvents(year);
-      C.colorcalendar(filteredEvents);
-      V.uicalendar.createEvents(filteredEvents);
-    } else
-      for (let ev of M.getEvents(year)) {
-        if (ev.groups.includes(selectedValue)) {
-          filteredEvents.push(ev);
-        }
-      }
+    } else {
+      filteredEvents = M.getEvents(year).filter((ev) =>
+        ev.groups.includes(selectedValue)
+      );
+    }
+
     V.uicalendar.clear();
     C.colorcalendar(filteredEvents);
     V.uicalendar.createEvents(filteredEvents);
+
+    // Sauvegarde de l'année et du groupe sélectionnés
+    localStorage.setItem("year", year);
+    localStorage.setItem("group", selectedValue);
   });
 };
-
 // Itération 6
 C.searchEvent = function () {
   function filterEvents(searchValue) {
@@ -92,7 +96,6 @@ C.searchEvent = function () {
     V.uicalendar.createEvents(filteredEvents);
   });
 };
-
 // Itération 7
 C.searchEventall = function () {
   function filterEvents(searchValue) {
@@ -118,7 +121,6 @@ C.searchEventall = function () {
     V.uicalendar.createEvents(filteredEvents);
   });
 };
-
 // Itération 8
 C.ViewPer = function () {
   let selectView = document.getElementById("select-view");
@@ -128,7 +130,6 @@ C.ViewPer = function () {
     V.uicalendar.changeView(selectedView);
   });
 };
-
 // Itération 8 / Itération 10 avec localstorage
 C.ViewPerLS = function () {
   let selectView = document.getElementById("select-view");
@@ -143,16 +144,38 @@ C.ViewPerLS = function () {
     V.uicalendar.changeView(selectedView);
   });
 };
-
 // Itération 9
 C.ControlViewMobile = function () {
   if (window.innerWidth < 768) {
     V.uicalendar.changeView("day");
   }
 };
+// Itération 10 / Itération qui est intégrée à l'itération 8 et l'itération 4 et l'itération 5
+C.ControlViewStorage = function () {
+  let selectYear = document.getElementById("select-year");
+  V.filtergroups();
+  selectYear.addEventListener("change", function () {
+    V.filtergroups();
+  });
 
-// Itération 10 / Itération qui est intégrée à l'itération 8 et Itération 4 
-
+  let savedYear = localStorage.getItem("year");
+  if (savedYear) {
+    let selectYear = document.getElementById("select-year");
+    if (selectYear) {
+      selectYear.value = savedYear;
+      selectYear.dispatchEvent(new Event("change"));
+    }
+  }
+  let savedGroup = localStorage.getItem("group");
+  if (savedGroup) {
+    let savedYear = localStorage.getItem("year");
+    let selectGroup = document.getElementById("select-group-" + savedYear);
+    if (selectGroup) {
+      selectGroup.value = savedGroup;
+      selectGroup.dispatchEvent(new Event("change"));
+    }
+  }
+};
 
 C.init = function () {
   let all = M.getEvents("mmi1").concat(
@@ -171,12 +194,6 @@ C.init = function () {
   C.ViewPerLS();
   C.ControlViewMobile();
   console.log(all);
-
-  let selectYear = document.getElementById("select-year");
-  V.filtergroups();
-  selectYear.addEventListener("change", function () {
-    V.filtergroups();
-  });
+  C.ControlViewStorage();
 };
-
 C.init();
