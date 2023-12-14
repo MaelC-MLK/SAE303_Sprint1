@@ -58,6 +58,20 @@ V.coloradd = function() {
   });
 }
 
+// Itération 3
+V.colorcalendar = function (calendar) {
+  let colorMap = {
+    mmi1: { CM: "#D31949", TD: "#f45464", TP: "#b02321", Autre: "#ffb84d" },
+    mmi2: { CM: "#00bdae", TD: "#1194a7", TP: "#10686b", Autre: "#ffd699" },
+    mmi3: { CM: "#e6dcd4", TD: "#bda18c", TP: "#3f352d", Autre: "#ffebcc" },
+  };
+  for (let ev of calendar) {
+    let color = colorMap[ev.calendarId][ev.type];
+    ev.backgroundColor = color;
+    ev.borderColor = "trasparence";
+  }
+};
+
 // Itération 5
 
 V.filtergroups = function() {
@@ -80,6 +94,37 @@ let selectGroupMMI3 = document.getElementById('select-group-mmi3');
          selectGroupMMI3.style.display = 'block';
      }
 }
+
+// Itération 8
+V.ViewPer = function () {
+  let selectView = document.getElementById("select-view");
+  localStorage.setItem("view", selectView.value);
+  selectView.addEventListener("change", function (event) {
+    let selectedView = event.target.value;
+    V.uicalendar.changeView(selectedView);
+  });
+};
+// Itération 8 / Itération 10 avec localstorage
+V.ViewPerLS = function () {
+  let selectView = document.getElementById("select-view");
+  if (localStorage.getItem("view")) {
+    let storedView = localStorage.getItem("view");
+    selectView.value = storedView;
+    V.uicalendar.changeView(storedView);
+  }
+  selectView.addEventListener("change", function (event) {
+    let selectedView = event.target.value;
+    localStorage.setItem("view", selectedView);
+    V.uicalendar.changeView(selectedView);
+  });
+};
+
+// Itération 9
+V.ControlViewMobile = function () {
+  if (window.innerWidth < 768) {
+    V.uicalendar.changeView("day");
+  }
+};
 
 
 document.querySelector("#prev").addEventListener("click", () => moveToNextOrPrevRange(-1));
