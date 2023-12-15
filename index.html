@@ -1,63 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      .none{
-    display: none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>MMI Calendar</title>
   </head>
   <body>
-  
-      <header>
-        <nav>
-        <button id="prev"> ← </button>
-        <button id="now"> O </button>
-        <button id="next"> → </button>
-
-        <select id="select-year">
-          <option value="all-year"> Toutes les années </option>
+    <div>
+    <header>
+      <nav class="content">
+        <select class="btn" id="select-year">
+          <option value="all-year">Toutes les années</option>
           <option value="mmi1">MMI1</option>
           <option value="mmi2">MMI2</option>
           <option value="mmi3">MMI3</option>
         </select>
 
-
-        <select class="none" id="select-group-mmi1">
-          <option value="all-groups"> Tous les cours </option>
+        <select class="none btn" id="select-group-mmi1">
+          <option value="all-groups">Tous les cours</option>
           <option value="BUT1-G1">BUT1-G1</option>
-          <option value="BUT1-G21">BUT1-G21</option>>
+          <option value="BUT1-G21">BUT1-G21</option>
+          >
           <option value="BUT1-G22">BUT1-G22</option>
-          <option value="BUT1-G3">BUT1-G3</option>>
+          <option value="BUT1-G3">BUT1-G3</option>
+          >
         </select>
-        <select class="none" id="select-group-mmi2">
+        <select class="none btn" id="select-group-mmi2">
           <option value="all-groups">Tous les cours</option>
           <option value="BUT2-G1">BUT2-G1</option>
           <option value="BUT2-G21">BUT2-G21</option>
           <option value="BUT2-G22">BUT2-G22</option>
           <option value="BUT2-G3">BUT2-G3</option>
         </select>
-        <select class="none" id="select-group-mmi3">
-          <option value="all-groups"> Tous les cours </option>
+
+        <select class="none btn" id="select-group-mmi3">
+          <option value="all-groups">Tous les cours</option>
           <option value="BUT3-G1">BUT3-G1</option>
           <option value="BUT3-G21">BUT3-G21</option>
           <option value="BUT3-G22">BUT3-G22</option>
           <option value="BUT3-G3">BUT3-G3</option>
         </select>
-        <select id="select-view">
+
+        <select class="btn" id="select-view">
           <option value="day">Jour</option>
           <option value="week" selected>Semaine</option>
           <option value="month">Mois</option>
         </select>
-        <input type="text" id="search-barre" placeholder="Recherchez ici">
-        </nav>
-      </header>
-      <main id="calendar" style="height: 100vh"></main>
+        <input type="text" class="btn" id="search-barre" placeholder="Recherchez ici" />
+        <div class="content_week">
+        <button class="btn" id="prev"> ← </button>
+        <button class="btn" id="next">  → </button>
+        <button class="btn" id="now">Aujourd'hui</button>
+      </div>
+      </nav>
+    </header>
 
-    <script type="module" src="/main.js"></script>
+
+    <main id="calendar" style="height: 100vh"></main>
     
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

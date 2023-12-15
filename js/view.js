@@ -61,9 +61,9 @@ V.coloradd = function() {
 // Itération 3
 V.colorcalendar = function (calendar) {
   let colorMap = {
-    mmi1: { CM: "#D31949", TD: "#f45464", TP: "#b02321", Autre: "#ffb84d" },
-    mmi2: { CM: "#00bdae", TD: "#1194a7", TP: "#10686b", Autre: "#ffd699" },
-    mmi3: { CM: "#e6dcd4", TD: "#bda18c", TP: "#3f352d", Autre: "#ffebcc" },
+    mmi1: { CM: "#87CEFA", TD: "#26619C", TP: "#6495ED", Autre: "#4682B4" },
+    mmi2: { CM: "#FFA07A", TD: "#FA8072", TP: "#E9967A", Autre: "#CD5C5C" },
+    mmi3: { CM: "#e6dcd4", TD: "#bda18c", TP: "#6f5e4a", Autre: "#ffebcc" },
   };
   for (let ev of calendar) {
     let color = colorMap[ev.calendarId][ev.type];
